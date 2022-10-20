@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class SnakePanel extends JPanel implements KeyListener,ActionListener{
-	//��������ͼƬ
 	ImageIcon up = new ImageIcon("images/up.png");
 	ImageIcon down = new ImageIcon("images/down.png");
 	ImageIcon left = new ImageIcon("images/left.png");
