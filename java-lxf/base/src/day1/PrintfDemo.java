@@ -1,3 +1,5 @@
+package day1;
+
 public class PrintfDemo {
     public static void main(String[] args) {
         double d = 345.76689;
