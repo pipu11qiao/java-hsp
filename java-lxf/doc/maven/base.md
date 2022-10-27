@@ -101,5 +101,76 @@ runtime是运行时使用，编译时不使用。就像mysql，它是一种jdbc�
 provided 编译时需要，运行时由Servlet服务器内置了相关jar，所以运行时不需要
 
 ##### maven 中央仓库
+
 从中央仓库下载包
 本地公共缓存包
+
+### 构建流程
+
+maven 不但有标准化的项目结构，还有标准的构建流程，可以自动实现编译、打包、发布等等、
+
+##### Lifecycle 和Phase
+
+maven的声明周期有一系列phase组成。
+
+```shell
+validate
+initialize
+generate-sources
+process-sources
+generate-resources
+process-resources
+compile
+process-classes
+generate-test-sources
+process-test-sources
+generate-test-resources
+process-test-resources
+test-compile
+process-test-classes
+test
+prepare-package
+package
+pre-integration-test
+integration-test
+post-integration-test
+verify
+install
+deploy
+```
+运行mvn package,会从开始一直运行到package这个phase上
+
+mvn clean
+
+```shell
+pre-clean
+clean
+post-clean
+```
+
+实际开发过程中，常使用的命令有：
+
+mvn clean: 清理所有生成的class和jar
+mvn clean compile: 先清理，在执行到compile
+mvn clean test: 先清理，在执行到test
+mvn clean package: 先清理，在执行到package
+
+
+## 使用插件
+maven执行phase实际是，调用插件执行
+maven已经内置了常用的标准插件
+
+
+## 模块管理
+
+一个大的项目可以拆分成小的项目
+
+可以使用公共的pom.xml文件，在父文件夹中放置共同的pom.xml配置文件
+
+#### 中央仓库 私有仓库 本地仓库
+
+## mvnw 
+
+maven wrapper Maven版本管理器
+
+## 发布自己的包
