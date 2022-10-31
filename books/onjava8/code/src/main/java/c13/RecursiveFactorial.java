@@ -1,9 +1,11 @@
 package c13;
 
-import java.util.function.IntFunction;
+public class RecursiveFactorial {
+    static IntCall fact;
 
-//public class RecursiveFactorial {
-//    public static void main(String[] args) {
-//        IntFunction fact = (int n) -> n == 0 ? 1 : n * fact(n - 1);
-//    }
-//}
+    public static void main(String[] args) {
+        fact = n -> n == 0 ? 1 : n * fact.call(n - 1);
+        int res = fact.call(4);
+        System.out.println(res);
+    }
+}
