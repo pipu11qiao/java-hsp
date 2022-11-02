@@ -28,3 +28,164 @@ C++的异常处理机制基于Ada，Java中的异常处理机制则建立在C++�
 
 当抛出异常后，有几件事会随之发生。首先，使用new在堆上创建异常对象，当前的执行路径被终止，并且从当前环境弹出对异常对象的引用。此时异常处理机制接管程序，并开始寻找一个恰当的地方来继续执行程序。找到异常处理程序，它的任务是讲程序从错误状态回复过来，以使程序要么换一种方式运行，要么继续运行下去。
 
+
+
+## 自定义异常
+
+自定义异常，必须从已有的异常类继承，最好是选择意思相近的异常类继承。
+对异常来说最重要的就是类名
+
+
+输出到标准错误流，或指定的错误输出
+
+Throwable类声明的printStackTrace()方法，打印 从方法调用处知道异常抛出处的方法调用序列。
+
+## 异常与记录日志
+
+使用java.util.logging工具将输出记录到日志中。
+
+可以丰富异常对象，但是基本上是用不上
+
+## 异常声明
+
+Java 鼓励人们把方法可能抛出的异常告知使用此方法的客户端程序员
+
+异常说明： 属于方法声明的一部分，紧跟在形式参数列表之后
+
+```java
+vaid f() throws TooBig,TooSmall,DivZero
+```
+
+```java
+void f()
+```
+表示方法不会抛出异常，除了RuntimeException
+
+## 捕获所有异常
+
+Exception是所有编程行为相关的基类。
+
+基类不会包含太多的具体信息。可以调用
+String getMessage()
+String getLocalizedMessage()
+来获取信息，或用本地语言表示的详细信息
+String toString()
+
+```java
+void printStackTrace()
+void printStackTrace(PrintStream)
+void printStackTrace(java.io.PrintWriter)
+```
+
+Throwable fillInStackTrace()
+用于Throwable 对象的内部记录栈帧的当前状态。
+
+```java
+            System.out.println("Caught Exception");
+            System.out.println("getMessage(): " + e.getMessage());
+            System.out.println("getLocalizedMessage():  " + e.getLocalizedMessage());
+            System.out.println("toString(): " + e);
+            System.out.println("printStackTrace():");
+            e.printStackTrace(System.out);
+
+```
+可以发现每个方法都比前一个提供了更多的信息 实际上它们每一个都是前一个的超集。
+
+### 多重捕获
+
+可以分别捕获
+也可以通过"或"将不同类型的异常组合起来
+
+catch(Except1 | Except2 | Except3 e){}
+
+## 栈轨迹
+
+printStackTrace()所提供的信息可以通过getStackTrace来直接访问。
+
+## 重新抛出异常
+
+可以向上层级环境抛出捕获到的异常
+此时的异常显示的抛出点不是当前栈的，如果想让异常成为当前栈抛出的，可以调用fillStackTrace()
+捕获异常后，抛出另一种异常，此时就像调用fillStackTrace的效果。
+
+
+## 精准的重新抛出异常
+
+java7之前只允许抛出捕获的异常类型
+
+## 异常链
+
+常常会想要在捕获一个异常后抛出另个一个异常，并且希望吧原始异常的信息保存下来，这被称为异常链。就能通过异常追踪到最开始的异常
+
+只有三种基本异常类提供了带cause 参数的构造器，他们是Error Exception 和 RuntimeException。如果把其他类型的异常链接起来，应该是用initCause方法
+
+
+## Java 标准异常
+
+Throwable 类表示任何可以作为异常被抛出的类。
+
+分为两种类型： Error 用来表示编译时和系统错误。 Exception 是可以被抛出的基本类型，要想对异常有全面的了解，浏览一下HTML格式的Java文档。
+
+## RuntimeException 
+
+编程错误，不需要特殊处理，捕获
+
+1. 无法预料的错误。比如从你控制范围之外传递进来的null引用
+2. 作为程序员，应该在代码中检查的错误。
+
+## finally进行清理
+
+finally 总会被执行
+
+用来做什么
+
+要把出内存之外的资源恢复到他们初始的状态时，要用到finally方法
+
+return 后的finally也会被执行
+### 丢失的异常
+
+
+一个异常没有处理，在finally一种抛出另一个异常
+
+
+## 异常限制
+
+### 构造器
+
+构造器中发生异常时，如果该对象包含了一些别的动作，打开文件，只有在对象使用完毕并且用户调用了特殊的清理方法只能才能得以清理。如果构造器抛出异常，这些清理不会被执行。这意味着编写构造器要格外小心。
+
+在创建需要清理的对象之后，立即进入一个try-finally语句块
+
+##Try-With-oResources 用法
+
+```java
+
+try(){
+        }
+```
+
+java7以前，try总是后面跟着一个{},但是现在可以跟一个带括号定义  括号内的部分称为资源规范头（resource specification header）。
+
+try-with-resource定义字句中创建的对象，必须实现 java.lang.AutoCloseable接口，这个接口有一个方法：close()
+
+查看Javadocs中的AutoCloseable,可以找到所有实现该接口的类列表。
+
+
+### 异常匹配
+
+异常处理系统会按照书写顺序找出"醉经"的处理程序，找到匹配的处理程序之后，它就认为异常得到处理，然后就不在继续查找。
+
+
+## 其他可选方式
+
+开发异常处理的初衷是为了方便程序员处理错误。
+
+异常处理的一个重要的原则是，只有在你知道如何处理的情况下才捕获异常。是错误处理代码和错误发生的地方相分离，是你专注于处理要完成的事情。主要代码更利于维护。通过允许一个处理程序去处理多个错误，异常处理还使得错误处理代码的数量趋于减少。
+
+"被检查的异常"使者问题变得复杂，因为它们强制你在可能还没准备好处理错误的时候被迫加上catch句子，这就导致了吞食则有害（harmful if swallowed）的问题
+
+
+
+
+
+
