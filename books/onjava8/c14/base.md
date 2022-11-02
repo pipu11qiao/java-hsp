@@ -105,7 +105,68 @@ sorted() 默认比较器  Comparator参数，也可以传入lambda函数
 * distinct() 消除流中的重复元素
 * filter(Predicate):过滤操作会保留与传递进去的过滤器函数计算结果为true的元素
 
+## 应用函数到元素
 
+* map(Function) 将函数操作应用在输入流的元素中，并将返回值传递到输出流中
+* mapToInt(ToIntFunction) 操作同上，但结果是IntStream
+* mapToLong 
+* mapToDubble
+
+
+## 在map() 中组合流
+解决： 用产生流的函数得到一个元素流
+flatMap()做了两件事，将产生流的函数应用在每个元素上（与map（）所做的相同），然后将每个流都扁平化为元素，因而最终产生的仅仅是元素。
+
+
+concat()以参数顺序组合两个流。
+
+
+## Optional 类
+
+如果在一个空流中获取元素会发生什么
+是否有某种对象，可作为流元素的持有者，即使查看的元素不存在也能友好的提示我们（也就是说，不会发生异常）
+
+Optional 一些标准流返回Optional对象，因为它们并不能保证预期结果一定存在：
+
+* findFirst() 返回一个包含第一个元素的Optional对象
+* findAny
+* min max
+* reduce
+* average
+
+通过Stream.empty() 创建空流。该方法需要上下文来获取类型，或者显示指定类型
+Stream.<String>empty()
+
+## 便利函数
+
+
+## 终端操作
+
+### 数组
+* toArray() 将流转成适当的数组
+* toArray(generator) 再特殊情况下，生成自定义类型的数组
+
+## 循环
+
+forEach(Consumer) 无序
+forEachOrdered(Consumer) 有序
+
+## 集合
+
+* collect(Collector)
+* collect(Supplier,BiConsumer,BiConsumer) 
+
+## 组合
+
+* reduce
+
+## 匹配
+
+## 查找
+
+## 信息
+
+## 数字流信息
 
 
 
