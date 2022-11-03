@@ -185,6 +185,25 @@ try-with-resource定义字句中创建的对象，必须实现 java.lang.AutoClo
 "被检查的异常"使者问题变得复杂，因为它们强制你在可能还没准备好处理错误的时候被迫加上catch句子，这就导致了吞食则有害（harmful if swallowed）的问题
 
 
+Guava 提供了前置断言的方法
+
+## 测试驱动开发
+
+TDD
+
+## 日志
+
+SLF4J
+
+
+## 调试
+
+debug
+
+## 基准测试
+
+
+
 
 
 
