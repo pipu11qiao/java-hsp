@@ -23,4 +23,10 @@ public class SortTest {
         boolean result = checkSortMethod(bubbleSort);
         assertTrue(result);
     }
+    @Test
+    public void testSelect(){
+        SelectSort selectSort = new SelectSort();
+        boolean result = checkSortMethod(selectSort);
+        assertTrue(result);
+    }
 }
