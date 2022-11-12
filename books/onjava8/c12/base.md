@@ -47,14 +47,17 @@ ArrayList已经向上转型为List。** 使用接口的目的是，如果想要�
 * Collections.addAll 方法接受一个Collection对象，以及一个数组或是一个逗号分隔的列表，将其中元素添加到Collection中。
 * Collection.addAll只接受一个Collection对象
 
-Arrays.asList的底层实现是数组
+Arrays.asList的底层实现是数组,得到的List无法进行add和remove操作
 
 ## 集合的打印
 
-Arrays.toSring()
-* ArrayList LinkedList
-* HashSet TreeSet LinkedHashSet。HashSet没有顺序，TreeSet根据比较顺序升序，LinkedHashSet 添加顺序
-* HashMap TreeMap LinkedHashMap. 顺序同Set
+Arrays.toSring()用来打印数组的信息,打印集合无需任何的其他方法，toString已经实现
+
+* ArrayList LinkedList 是List类型
+* HashSet TreeSet LinkedHashSet。是Set类型 HashSet没有顺序，TreeSet根据比较顺序升序，LinkedHashSet 添加顺序
+* HashMap TreeMap LinkedHashMap. 顺序同Set  
+
+Map 包含 put和 get方法
 
 ## 列表List
 
@@ -97,6 +100,8 @@ subList() 所产生的列表是原始列表
 ## ListIterator
 
 ListIterator可以双向移动，只能由各种List类生成。
+
+ListIterator可以双向移动。
 
 ## 列表LinkedList
 

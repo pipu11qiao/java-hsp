@@ -1,7 +1,5 @@
 package c19.pets;
 
-import c19.pets.Pet;
-
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;

@@ -40,83 +40,69 @@ java8采用 在接口中添加被 default修饰的方法。 通过这种方案�
 
 ### 流创建
 
-Stream.of
-每个集合都可以通过stream()方法来产生一个流。
+1. Stream.of() 将一组元素转化成为流
+2. 每个集合都可以通过stream()方法来产生一个流。
 
 
 
 map 中间操作，获取每个元素。
 为了从Map集合中产生数据流，首先调用entrySet()产生一个对象流，每个对象包含key和value两个属性，调用getKey和个Value
 
-### 随机数据流
+3. 随机数据流
+rand
+* ints() longs doubles 传入参数可以控制上下限
 
 boxed()流操作会自动地把基本类型包装成为对对应的装箱类型。
+
+4. IntStream 类提供了 range()方法用于生成整型的序列的流。编写循环时，这个方法更加便利。
 
 ```java
 System.getProperty("user.dir");//获取当前执行路径
 ```
 
-外部迭代的消除。
-collect()收集操作，它根据参数来组合所有流中的元素。
-Stream.generate(), 可以将任意Supplier<T>用于生成<T>类型的流
+5. Stream.generate() 搭配 Supplier<T> 来创造流
 
+6. Stream.iterate() 以种子第一个参数开头，并将其传给方法第二个参数。 方法的结果将添加到流，并存储作为第一个参数用于下次调用。
 
-### int类型的范围
+7.  流的建造者模式 Stream.Builder
 
-IntStream 类提供了 range()方法用于生成整型序列的流
+```java
+Stream.Builder<String> builder = Stream.builder();
+builder.add()
+builder.build()
+```
+8. Arrays Arrays.stream
 
-### generate
-
-使用Stream.generate()搭配Supplier<T>使用，生成一个流对象
-
-### iterate()
-
-Stream.iterator() 以种子（第一个参数）开头，并将其传给方法（第二个参数）。方法的结果将添加到流，并存储作为第一个参数用于下次调用。
-
-### 流的建造者模式
-
-在建造者设计模式（也称构造器模式）中，首先创建一个builder对象，传递个它多个构造器信息，最后执行构造。
-
-### Arrays
-
-Arrays 类中含有一个名为steam()的静态方法用于吧数组转换为流。
-
-### 正则表达式
-
-java.util.regex.Pattern 中增加了一个方法 splitAsStream()
-限制是 输入只能是CharSequence
+9. 正则表达式 Patter.compile("\\w+").splitAsStream(str);
 
 ## 中间操作
 
 中间操作用于从一个流中获取对象，并将对象作为另一个流从后端输出，已连接到其他操作
 
-### 跟踪和调试
+1. peek()跟踪和调试
 
-peek()操作的目的是帮助测试，它允许你无修改的查看流中的元素。
-
+操作的目的是帮助测试，它允许你无修改的查看流中的元素。
 pee符合付返回值的Consumer函数式接口，所以我们只能观察，无法使用不同的元素来替换流中的对象
 
-### 流元素排序
+2. sorted 流元素排序
 
 sorted() 默认比较器  Comparator参数，也可以传入lambda函数
 
-### 移除元素
+3. 移除元素
 
 * distinct() 消除流中的重复元素
 * filter(Predicate):过滤操作会保留与传递进去的过滤器函数计算结果为true的元素
 
-## 应用函数到元素
+4. 应用函数到元素
 
 * map(Function) 将函数操作应用在输入流的元素中，并将返回值传递到输出流中
 * mapToInt(ToIntFunction) 操作同上，但结果是IntStream
 * mapToLong 
 * mapToDubble
 
-
-## 在map() 中组合流
+5. 在map() 中组合流
 解决： 用产生流的函数得到一个元素流
 flatMap()做了两件事，将产生流的函数应用在每个元素上（与map（）所做的相同），然后将每个流都扁平化为元素，因而最终产生的仅仅是元素。
-
 
 concat()以参数顺序组合两个流。
 
