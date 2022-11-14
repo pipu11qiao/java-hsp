@@ -60,7 +60,25 @@ LIKE
 
 
 5. 分页查询
+LIMIT size OFFSET count
+可见，分页查询的关键在于，首先要确定每页需要显示的结果数量size，
+* LIMIT 总是设定为pageSize
+* OFFSET 计算公式为 PageSize * (pageIndex-1)
 6. 聚合查询
+
+对于统计总数，平均数这类计算，SQL提供了专门的聚合函数，使用聚合函数进行查询，就是聚合查询。
+
+* COUNT
+* SUM
+* AVG
+* MAX
+* MIN
+
+分组聚合
+
+GROUP BY
+
+
 7. 多表查询
 8. 连接查询
 
