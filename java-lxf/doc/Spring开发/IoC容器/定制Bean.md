@@ -27,6 +27,10 @@ public class Hello{
 
 ### 创建第三方Bean
 
+如果一个Bean不在我们的package管理范围之内，如何创建？
+
+自己在@Configuration类中编写一个Java方法并返回它，注意给方法添加一共@Bean注解：
+
 ```java
 @Configuration
 @ComponentScan
@@ -41,7 +45,12 @@ public class AppConfig{
 ### 初始化和销毁
 
 一个Bean在注入必要的依赖后需要进行初始化（监听消息等），在容器关闭时，有时候还需要清理资源。
+Spring 容器会Bean进行初始化的流程：
+1. 调用构造方法创建实例
+2. 更具@Autowired进行注入
+3. 调用标记有@PostConstructor的方法进行初始化
 
+Spring 只根据Annotation查找无参数方法，对方法名不做要求
 
 ### 使用别名 @Bean("name") 或 @Bean  @Qualifier("z")
 

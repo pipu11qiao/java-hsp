@@ -1,0 +1,5 @@
+AppConfig.class
+org/example/service/User.class
+org/example/service/MailService.class
+org/example/service/UserService.class
+org/example/LoggingAspect.class
