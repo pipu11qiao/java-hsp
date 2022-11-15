@@ -1,4 +1,4 @@
-package org.example;
+package pipu.prev;
 
 public class Student {
     public String name;

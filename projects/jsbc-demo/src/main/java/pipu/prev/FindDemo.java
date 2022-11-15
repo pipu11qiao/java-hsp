@@ -1,4 +1,4 @@
-package org.example;
+package pipu.prev;
 
 import java.sql.*;
 import java.util.function.Function;

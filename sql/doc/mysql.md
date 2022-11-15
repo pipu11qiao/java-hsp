@@ -95,7 +95,7 @@
 
 如果想要对一个表进行快照，即复制一份当前表的数据到一个表，可以结合CREATE TABLE 和 SELECT
 
-CREATE TABLE students_of_class1 SELECT * FROM students WHERE class_id=1;
+> CREATE TABLE students_of_class1 SELECT * FROM students WHERE class_id=1;
 
 5. 写入查询结果集
 

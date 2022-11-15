@@ -1,7 +1,6 @@
-package org.example;
+package pipu.prev;
 
 import java.sql.*;
-import java.util.function.Function;
 
 public class UpdateDemo {
     static String JDBC_URL = "jdbc:mysql://localhost:3306/learnjdbc";

@@ -33,7 +33,7 @@ VARCHAR(N)能满足字符串存储的要求
 各个不同的数据库对sql标准都进行了支持，但是也基本都有自己的扩展。
 总的来说，sql语言定义了几种操作数据库的能力：
 
-DDL: Data Manipulation Language
+DDL: Data Definition Language
 DDL允许用户定义数据，也就是创建表、删除表、修改表结构这些操作。通常，DDL由数据库管理员执行
 
 DML： Data Manipulation Language
