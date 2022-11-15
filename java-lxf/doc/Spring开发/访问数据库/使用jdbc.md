@@ -1,0 +1,3 @@
+类似于前面的jdbc编程，在spring中使用jdbc有一套自己的规则。
+
+在Spring使用jdbc，首先通过IoC容器创建并管理一个DataSource实例，然后，Spirng提供了一个JdbcTemplate,可以方便地让我们操作jdbc，
